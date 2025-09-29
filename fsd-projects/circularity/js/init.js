@@ -3,7 +3,6 @@ var init = function (window) {
     var 
         draw = window.opspark.draw,
         physikz = window.opspark.racket.physikz,
-        
         app = window.opspark.makeApp(),
         canvas = app.canvas, 
         view = app.view,
@@ -20,16 +19,16 @@ var init = function (window) {
         ///////////////////
         
         // TODO 1 : Declare and initialize our variables
-        //creates a variable and array called circle to later be edited to move.//
+       
         var circle; // variable to hold a single circle when creating circles / iterating
         var circles = []; // variable to store all circles in an array
 
 
         // TODO 2 : Create a function that draws a circle 
-        //creates a circle of a random size and color.//
-        function drawCircle() {
-            circle = draw.randomCircleInArea(canvas, true, true, "#999", 2);
-            physikz.addRandomVelocity(circle, canvas, 5, 5);
+      
+        function drawCircle() { //declares function//
+            circle = draw.randomCircleInArea(canvas, true, true, "#999", 2);//makes circle a random color//
+            physikz.addRandomVelocity(circle, canvas, 5, 5);//gives the circle a random speed//
             view.addChild(circle);
             circles.push(circle);
          }
@@ -39,10 +38,10 @@ var init = function (window) {
         
     
         // TODO 7 : Use a loop to create multiple circles
-       //repeates the drawCircle function 100 times to make 100 circles.//
        
-        for (var i = 0; i < 100; i++) {
-            drawCircle();
+       
+        for (var i = 0; i < 100; i++) {//repeates the drawCircle function 100 times to make 100 circles.//
+            drawCircle();//actual code for creating a circle//
         }
 
 
@@ -65,10 +64,10 @@ var init = function (window) {
 
 
             // TODO 8 / TODO 9 : Iterate over the array
-            //applies repetitive code to every circle.//
-            for (var i = 0; i < circles.length; i++) {
-                physikz.updatePosition(circles[i]);
-                game.checkCirclePosition(circles[i]);
+            
+            for (var i = 0; i < circles.length; i++) {//repeats the repetitive code and applies it to every circle//
+                physikz.updatePosition(circles[i]); // changes the position of every circle after it crosses border//
+                game.checkCirclePosition(circles[i]);//checks to see if circle has passed a border//
             }
             
         }
@@ -78,25 +77,22 @@ var init = function (window) {
         Function. If that circle drifts off the screen, this Function should move
         it to the opposite side of the screen.
         */
-        game.checkCirclePosition = function(circle) {
+        game.checkCirclePosition = function(circle) {//declares function for moving circle to other side of border//
 
-            // if the circle has gone past the RIGHT side of the screen then place it on the LEFT//
-            if ( circle.x > canvas.width ) {
-                circle.x = 0;
+           
+            if ( circle.x > canvas.width ) {//checks to see if circle is on the right border of screen//
+                circle.x = 0; // if the circle has gone past the RIGHT side of the screen then place it on the LEFT//
             }
             
-            // TODO 6 : YOUR CODE STARTS HERE //////////////////////
-            //Move circles from the left edge to the right.//
-            if ( circle.x < 0 ) {
-                circle.x = canvas.width;
+            // TODO 6 : YOUR CODE STARTS HERE ///////////////////// 
+            if ( circle.x < 0 ) {//checks to see if circle is on the left border of screen//
+                circle.x = canvas.width; //Move circles from the left edge to the right.//
             }
-            // Move circles from the bottom edge to the top.// 
-            if ( circle.y > canvas.height ) {
-                circle.y = 0;
-            }
-            // Move circles from the top edge to the bottom.//
-            if ( circle.y < 0 ) {
-                circle.y = canvas.height;
+            if ( circle.y > canvas.height ) {//checks to see if circle is on the bottom border of screen//
+                circle.y = 0;// Move circles from the bottom edge to the top.// 
+            }  
+           if ( circle.y < 0 ) {//checks to see if circle is on the top border of screen//
+                circle.y = canvas.height;// Move circles from the top edge to the bottom.//
             }
             // YOUR TODO 6 CODE ENDS HERE //////////////////////////
         }
