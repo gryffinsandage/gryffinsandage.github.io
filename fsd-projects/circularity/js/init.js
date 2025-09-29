@@ -20,19 +20,30 @@ var init = function (window) {
         ///////////////////
         
         // TODO 1 : Declare and initialize our variables
-
+        //creates a variable and array called circle to later be edited to move.//
+        var circle; // variable to hold a single circle when creating circles / iterating
+        var circles = []; // variable to store all circles in an array
 
 
         // TODO 2 : Create a function that draws a circle 
-        
+        //creates a circle of a random size and color.//
+        function drawCircle() {
+            circle = draw.randomCircleInArea(canvas, true, true, "#999", 2);
+            physikz.addRandomVelocity(circle, canvas, 5, 5);
+            view.addChild(circle);
+            circles.push(circle);
+         }
 
 
         // TODO 3 : Call the drawCircle() function
-
-
-
+        
+    
         // TODO 7 : Use a loop to create multiple circles
-
+       //repeates the drawCircle function 100 times to make 100 circles.//
+       
+        for (var i = 0; i < 100; i++) {
+            drawCircle();
+        }
 
 
 
@@ -47,13 +58,18 @@ var init = function (window) {
         */
         function update() {
             // TODO 4 : Update the position of each circle using physikz.updatePosition()
-
+ 
             
             // TODO 5 : Call game.checkCirclePosition() on your circles
-           
+         
+
 
             // TODO 8 / TODO 9 : Iterate over the array
-           
+            //applies repetitive code to every circle.//
+            for (var i = 0; i < circles.length; i++) {
+                physikz.updatePosition(circles[i]);
+                game.checkCirclePosition(circles[i]);
+            }
             
         }
     
@@ -64,15 +80,24 @@ var init = function (window) {
         */
         game.checkCirclePosition = function(circle) {
 
-            // if the circle has gone past the RIGHT side of the screen then place it on the LEFT
+            // if the circle has gone past the RIGHT side of the screen then place it on the LEFT//
             if ( circle.x > canvas.width ) {
                 circle.x = 0;
             }
             
             // TODO 6 : YOUR CODE STARTS HERE //////////////////////
-            
-
-
+            //Move circles from the left edge to the right.//
+            if ( circle.x < 0 ) {
+                circle.x = canvas.width;
+            }
+            // Move circles from the bottom edge to the top.// 
+            if ( circle.y > canvas.height ) {
+                circle.y = 0;
+            }
+            // Move circles from the top edge to the bottom.//
+            if ( circle.y < 0 ) {
+                circle.y = canvas.height;
+            }
             // YOUR TODO 6 CODE ENDS HERE //////////////////////////
         }
         
