@@ -30,7 +30,7 @@ var background = function (window) {
         //////////////////////////////////////////////////////////////////
         // TODO (several):
        var tree;
-      
+       var buildings = [];
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
         function render() {
@@ -39,7 +39,7 @@ var background = function (window) {
             // TODO 1:
             // this currently fills the background with an obnoxious yellow;
             // you should modify both the height and color to suit your game
-            var backgroundFill = draw.rect(canvasWidth,groundY,'Black');//draws a rectangle and stores it in the backgroundFill
+            var backgroundFill = draw.rect(canvasWidth,groundY,'Pink');//draws a rectangle and stores it in the backgroundFill
             background.addChild(backgroundFill);// adds backgroundFill to the background object
             
             // TODO 2: - Add a moon and starfield
@@ -59,7 +59,15 @@ var background = function (window) {
           
 
             // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            
+            for (var i = 0; i < 5; ++i) {//creates 5 buildings
+                var buildingColors=["pink","Blue","Red","White","Green"];
+                var buildingHeight = 300* Math.random();//stores a value of building's height
+                var building = draw.rect(75, buildingHeight, buildingColors[i], "Black", 1);//draws a rectangle with changable heights, colors, widths, and outlines
+                building.x = 200 * i;//gives the buildings' x values where they're each 200 units apart
+                building.y = groundY - buildingHeight;//gives y value of building where the look like they are held up by the ground
+                background.addChild(building);//makes it visible in the background
+                buildings.push(building);//pushe it to the buildings array for it to star over again
+            }
             
             // TODO 3: Part 1 - Add a tree
             tree = draw.bitmap("img/tree.png");//creates a bitmap object using the tree image
@@ -81,13 +89,19 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 3: Part 2 - Move the tree!
-            tree.x = tree.x -1;//moves the tree to the left by subtreacting from its current x position
+            tree.x = tree.x - 5;//moves the tree to the left by subtreacting from its current x position
             if (tree.x < -200) {
                 tree.x = canvasWidth;//moves the tree to the right side of the canvas if it crosses the left border of the canvas
             }
             
             // TODO 4: Part 2 - Parallax
-            
+            for (var i = 0; i < buildings.length; i++) {
+                var building = buildings[i];//assigns the length of the buildings to the variable building
+                building.x -=1;//takes x value of building and subtracts one from it to move it to the left
+                if(building.x<-200){//checks if the building has gone off the elft side of the screen
+                    building.x = canvasWidth;//moves the building to the right side of the screen
+                }
+            }
 
         } // end of update function - DO NOT DELETE
         
