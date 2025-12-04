@@ -20,19 +20,21 @@ var runLevels = function (window) {
     // BEGIN EDITING YOUR CODE HERE
     
 
-    function createObstacle(x, y, damage){
+    function createObstacle(x, y, damage, rotation, image, scaleX, scaleY){
       var hitZoneSize = 25;//size of collision area of obstacle
       var damageFromObstacle = damage;//amount of damage taken from obstacle
       var obstacleHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);//creates obstacles with size and hitzone
       obstacleHitZone.x = x;//sets obstacles x position
       obstacleHitZone.y = y;//sets obstackes y position
       game.addGameItem(obstacleHitZone);//adds game item to game
-      var obstacleImage = draw.bitmap("img/sawblade.png");//draws sawblade as a bitmap and stores it to obstacleImage
+      var obstacleImage = draw.bitmap(image);//draws sawblade as a bitmap and stores it to obstacleImage
       obstacleHitZone.addChild(obstacleImage);//adds picture as a child to hitzone
       obstacleImage.x = -25;//offsets image horizontally relative to the hitzone
       obstacleImage.y = -25;//offsets image vertically relative to the hitzone
+      obstacleImage.scaleX = scaleX;
+      obstacleImage.scaleY = scaleY;
 
-      obstacleHitZone.rotationalVelocity = 50;  
+      obstacleHitZone.rotationalVelocity = rotation;  
 
 
 
@@ -83,7 +85,7 @@ var runLevels = function (window) {
       reward.fadeOut();// effect of the enemy death, fading
     };
   }
-    createReward(1000, groundY- 50);
+    createReward(1000, groundY- 150);
 
       function createLevelMarker(x,y) {
         var levelMarker = game.createGameItem("level", 25);
@@ -105,11 +107,8 @@ var runLevels = function (window) {
           startLevel();
         };
       };
-      createLevelMarker(1600, groundY-50);
+      createLevelMarker(1800, groundY-150);
 
-    createObstacle(600, groundY - 110, 10);
-    createObstacle(1000, groundY - 110, 10);
-    createObstacle(1400, groundY - 110, 10);
 
     
 
@@ -117,10 +116,22 @@ var runLevels = function (window) {
       // TODO 13 goes below here
         var level = levelData[currentLevel];//fetches current level from levelData array, and stores it inside level variable
         var levelObjects =level.gameItems;// retrieves the array of game itemsand stores it in the level objects variable.
+        
+        
         for(var i = 0; i < levelObjects.length; i++){
           var element = levelObjects[i];
+
           if(element.type === "obstacle"){
-            createObstacle(element.x, element.y, damage);
+            createObstacle(element.x, element.y,element.damage, element.rotation, element.image, element.scaleX, element.scaleY);
+          }
+          if(element.type === "enemy"){
+            createEnemy(element.x, element.y);
+          }
+          if(element.type === "reward"){
+            createReward(element.x, element.y);
+          }
+          if(element.type === "levelMarker"){
+            createLevelMarker(element.x, element.y);
           }
 
         }
