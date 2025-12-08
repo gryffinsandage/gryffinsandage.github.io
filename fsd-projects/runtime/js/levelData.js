@@ -18,7 +18,7 @@ var makeLevelData = function (window) {
           { type: "obstacle", x: 600, y: groundY - 15, damage: 10, rotation: 0, image: "img/log (1).png",scaleX:0.75, scaleY:0.5},
           { type: "obstacle", x: 1000, y: groundY - 110, damage: 10, rotation: 0},
           { type: "obstacle", x: 1400, y: groundY - 110, damage: 10, rotation: 0},
-          { type: "enemy", x: 700, y: groundY - 110},
+          { type: "enemy", x: 700, y: groundY - 110, image:"img/hedorah.png"},
           { type: "enemy", x: 1100, y: groundY - 110},
           { type: "enemy", x: 1500, y: groundY - 110},
           { type: "reward", x: 800, y: groundY - 110},

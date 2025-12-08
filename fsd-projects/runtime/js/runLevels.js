@@ -39,9 +39,9 @@ var runLevels = function (window) {
 
 
     } 
-    function createEnemy(x,y) {
+    function createEnemy(x,y, image) {
     var enemy = game.createGameItem("enemy", 25);
-    var enemyImage = draw.rect(50, 50, "red");//creates image of enemy and stores it to the enemyImage variable
+    var enemyImage = draw.bitmap(image);//creates image of enemy and stores it to the enemyImage variable
     enemyImage.x = -25;//horizontal offset to hitzone
     enemyImage.y = -25;//vertical offset to hitzone
     enemy.addChild(enemyImage);//attaches image to enemy object
@@ -125,7 +125,7 @@ var runLevels = function (window) {
             createObstacle(element.x, element.y,element.damage, element.rotation, element.image, element.scaleX, element.scaleY);
           }
           if(element.type === "enemy"){
-            createEnemy(element.x, element.y);
+            createEnemy(element.x, element.y, element.image);
           }
           if(element.type === "reward"){
             createReward(element.x, element.y);
