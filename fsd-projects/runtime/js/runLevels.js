@@ -20,7 +20,7 @@ var runLevels = function (window) {
     // BEGIN EDITING YOUR CODE HERE
     
 
-    function createObstacle(x, y, damage, rotation, image, scaleX, scaleY){
+    function createObstacle(x, y, damage, rotation, image, scaleX, scaleY, offsetX, offsetY){
       var hitZoneSize = 25;//size of collision area of obstacle
       var damageFromObstacle = damage;//amount of damage taken from obstacle
       var obstacleHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);//creates obstacles with size and hitzone
@@ -29,8 +29,8 @@ var runLevels = function (window) {
       game.addGameItem(obstacleHitZone);//adds game item to game
       var obstacleImage = draw.bitmap(image);//draws sawblade as a bitmap and stores it to obstacleImage
       obstacleHitZone.addChild(obstacleImage);//adds picture as a child to hitzone
-      obstacleImage.x = -25;//offsets image horizontally relative to the hitzone
-      obstacleImage.y = -25;//offsets image vertically relative to the hitzone
+      obstacleImage.x = offsetX;//offsets image horizontally relative to the hitzone
+      obstacleImage.y = offsetY;//offsets image vertically relative to the hitzone
       obstacleImage.scaleX = scaleX;
       obstacleImage.scaleY = scaleY;
 
@@ -39,7 +39,7 @@ var runLevels = function (window) {
 
 
     } 
-    function createEnemy(x,y, image) {
+    function createEnemy(x,y, image,scaleX,scaleY) {
     var enemy = game.createGameItem("enemy", 25);
     var enemyImage = draw.bitmap(image);//creates image of enemy and stores it to the enemyImage variable
     enemyImage.x = -25;//horizontal offset to hitzone
@@ -47,6 +47,8 @@ var runLevels = function (window) {
     enemy.addChild(enemyImage);//attaches image to enemy object
     enemy.x = x;//set x position of enemy
     enemy.y = y;//set y position of enemy
+    enemyImage.scaleX = scaleX;
+    enemyImage.scaleY = scaleY;
     game.addGameItem(enemy);//makes the enemy visible in the game
 
     enemy.velocityX -= 3// sets the speed of the enemy
@@ -63,17 +65,18 @@ var runLevels = function (window) {
     };
     }
 
-    createEnemy(400, groundY-50);
-    createEnemy(2000, groundY-50);
 
-  function createReward(x,y) {
+
+  function createReward(x,y, image, scaleX, scaleY, offsetX, offsetY) {
     var reward = game.createGameItem("reward", 25);
-    var rewardImage = draw.rect(50, 50, "blue");//creates image of enemy and stores it to the enemyImage variable
-    rewardImage.x = -25;//horizontal offset to hitzone
-    rewardImage.y = -25;//vertical offset to hitzone
+    var rewardImage = draw.bitmap(image);//creates image of enemy and stores it to the enemyImage variable
+    rewardImage.x = offsetX;//horizontal offset to hitzone
+    rewardImage.y = offsetY;//vertical offset to hitzone
     reward.addChild(rewardImage);//attaches image to enemy object
     reward.x = x;//set x position of enemy
     reward.y = y;//set y position of enemy
+    rewardImage.scaleX = scaleX
+    rewardImage.scaleY = scaleY
     game.addGameItem(reward);//makes the enemy visible in the game
 
     reward.velocityX -= 3// sets the speed of the enemy
@@ -85,7 +88,7 @@ var runLevels = function (window) {
       reward.fadeOut();// effect of the enemy death, fading
     };
   }
-    createReward(1000, groundY- 150);
+
 
       function createLevelMarker(x,y) {
         var levelMarker = game.createGameItem("level", 25);
@@ -107,7 +110,7 @@ var runLevels = function (window) {
           startLevel();
         };
       };
-      createLevelMarker(1800, groundY-150);
+
 
 
     
@@ -122,13 +125,13 @@ var runLevels = function (window) {
           var element = levelObjects[i];
 
           if(element.type === "obstacle"){
-            createObstacle(element.x, element.y,element.damage, element.rotation, element.image, element.scaleX, element.scaleY);
+            createObstacle(element.x, element.y,element.damage, element.rotation, element.image, element.scaleX, element.scaleY,element.offsetX, element.offsetY);
           }
           if(element.type === "enemy"){
-            createEnemy(element.x, element.y, element.image);
+            createEnemy(element.x, element.y, element.image, element.scaleX, element.scaleY);
           }
           if(element.type === "reward"){
-            createReward(element.x, element.y);
+            createReward(element.x, element.y,element.image, element.scaleX, element.scaleY, element.offsetX, element.offsetY);
           }
           if(element.type === "levelMarker"){
             createLevelMarker(element.x, element.y);
