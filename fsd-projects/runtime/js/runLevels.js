@@ -56,19 +56,19 @@ var runLevels = function (window) {
 
       //handles when halle collides with enemy
     enemy.onPlayerCollision = function(){
-      game.changeIntegrity(-10)// player loses 10 health if it touches the enemy
+      game.changeIntegrity(-100)// player loses 100 health if they touches the enemy
     };
 
     //handles the death of the enemy
     enemy.onProjectileCollision = function(){
-    game.increaseScore(100);// gives player 100 points if the enemy is killed
+    game.increaseScore(300);// gives player 100 points if the enemy is killed
     enemy.fadeOut();// effect of the enemy death, fading
     };
     }
 
 
 
-  function createReward(x,y, image, scaleX, scaleY, offsetX, offsetY) {
+  function createReward(x,y, image, scaleX, scaleY, offsetX, offsetY, points) {
     var reward = game.createGameItem("reward", 25);
     var rewardImage = draw.bitmap(image);//creates image of enemy and stores it to the enemyImage variable
     rewardImage.x = offsetX;//horizontal offset to hitzone
@@ -85,29 +85,31 @@ var runLevels = function (window) {
       //handles when halle collides with enemy
     reward.onPlayerCollision = function(){
       game.changeIntegrity(10)// player gains 10 health if it touches the reward
-      game.increaseScore(100);// gives player 100 points if the enemy is killed
+      game.increaseScore(points);// gives player 100 points if the enemy is killed
       reward.fadeOut();// effect of the enemy death, fading
     };
   }
 
 
-      function createLevelMarker(x,y) {
+      function createLevelMarker(x,y, offsetX, offsetY, image, scaleX, scaleY) {
         var levelMarker = game.createGameItem("level", 25);
-        var levelImage = draw.rect(50, 50, "yellow");//creates image of enemy and stores it to the enemyImage variable
-        levelImage.x = -25;//horizontal offset to hitzone
-        levelImage.y = -25;//vertical offset to hitzone
+        var levelImage = draw. bitmap(image);//creates image of enemy and stores it to the enemyImage variable
+        levelImage.x = offsetX;//horizontal offset to hitzone
+        levelImage.y = offsetY;//vertical offset to hitzone
         levelMarker.addChild(levelImage);//attaches image to enemy object
         levelMarker.x = x;//set x position of enemy
         levelMarker.y = y;//set y position of enemy
+        levelImage.scaleX = scaleX
+        levelImage.scaleY = scaleY
         game.addGameItem(levelMarker);//makes the enemy visible in the game
 
         levelMarker.velocityX -= 3// sets the speed of the enemy
           
           //handles when halle collides with enemy
         levelMarker.onPlayerCollision = function(){
-          game.changeIntegrity(100)// player gains 10 health if it touches the reward
-          game.increaseScore(500);// gives player 100 points if the enemy is killed
-          levelMarker.fadeOut();// effect of the enemy death, fading
+          game.changeIntegrity(100)// player gains 100 health if it touches the marker
+          game.increaseScore(500);// gives player 100 points if the marker is touched
+          levelMarker.fadeOut();// effect of the marker death, fading
           startLevel();
         };
       };
@@ -132,10 +134,10 @@ var runLevels = function (window) {
             createEnemy(element.x, element.y, element.image, element.scaleX, element.scaleY,element.offsetX,element.offsetY);
           }
           if(element.type === "reward"){
-            createReward(element.x, element.y,element.image, element.scaleX, element.scaleY, element.offsetX, element.offsetY);
+            createReward(element.x, element.y,element.image, element.scaleX, element.scaleY, element.offsetX, element.offsetY, element.points);
           }
           if(element.type === "levelMarker"){
-            createLevelMarker(element.x, element.y);
+            createLevelMarker(element.x, element.y, element.offsetX, element.offsetY, element.image, element.scaleX, element.scaleY);
           }
 
         }

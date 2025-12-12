@@ -16,16 +16,20 @@ var makeLevelData = function (window) {
         number: 1,
         speed: -3,
         gameItems: [
-          { type: "obstacle", x: 600, y: groundY - 5, damage: 10, rotation: 0, image: "img/cannon2.png",scaleX:0.5, scaleY:0.5,offsetX:-62, offsetY: -65},
-          { type: "obstacle", x: 1000, y: groundY - 5, damage: 10, rotation: 0, image: "img/tesla.png",scaleX:0.5, scaleY:0.5,offsetX:-45, offsetY: -40},
-          { type: "obstacle", x: 1400, y: groundY - 5, damage: 10, rotation: 0, image: "img/cage.png",scaleX:0.25, scaleY:0.25,offsetX:-30, offsetY: -40},
+          { type: "obstacle", x: 600, y: groundY - 5, damage: 50, rotation: 0, image: "img/cannon2.png",scaleX:0.5, scaleY:0.5,offsetX:-62, offsetY: -65},
+          { type: "obstacle", x: 800, y: groundY - 120, damage: 100, rotation: 0,  image:"img/flight.png",scaleX:0.25,scaleY:0.25, offsetX:-25 ,offsetY: -25},
+          { type: "obstacle", x: 1000, y: groundY - 5, damage: 50, rotation: 0, image: "img/tesla.png",scaleX:0.5, scaleY:0.5,offsetX:-45, offsetY: -40},
+          { type: "obstacle", x: 1200, y: groundY - 120, damage: 100, rotation: 0,  image:"img/flight.png",scaleX:0.25,scaleY:0.25, offsetX:-25 ,offsetY: -25},
+          { type: "obstacle", x: 1400, y: groundY - 5, damage: 50, rotation: 0, image: "img/cage.png",scaleX:0.25, scaleY:0.25,offsetX:-30, offsetY: -40},
+          { type: "obstacle", x: 1800, y: groundY - 120, damage: 100, rotation: 0,  image:"img/flight.png",scaleX:0.25,scaleY:0.25, offsetX:-25 ,offsetY: -25},
           { type: "enemy", x: 700, y: groundY - 50, image:"img/firesprit2.png",scaleX:0.25,scaleY:0.25, offsetX:-25 ,offsetY: -25},
           { type: "enemy", x: 1500, y: groundY - 50, image:"img/electro.png",scaleX:0.25,scaleY:0.25, offsetX:-25 ,offsetY: -25},
           { type: "enemy", x: 2000, y: groundY - 50, image:"img/ice.png",scaleX:0.25,scaleY:0.25, offsetX:-25 ,offsetY: -25},
-          { type: "reward", x: 400, y: groundY - 110, image: "img/coin.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30},
-          { type: "reward", x: 1200, y: groundY - 110, image: "img/coin.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30},
-          { type: "reward", x: 1600, y: groundY - 110, image: "img/coin.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30},
-          { type: "levelMarker",}
+          { type: "enemy", x: 2500, y: groundY - 50, image:"img/pekka.png",scaleX:2,scaleY:2, offsetX:-220 ,offsetY: -220},
+          { type: "reward", x: 650, y: groundY - 110, image: "img/coin.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30, points: 200},
+          { type: "reward", x: 1250, y: groundY - 110, image: "img/coin.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30, points: 200},
+          { type: "reward", x: 1600, y: groundY - 110, image: "img/coin.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30, points: 200},
+          { type: "levelMarker", x: 3050, y: groundY - 110, offsetX: -35, offsetY: -25, image: "img/chest.png", scaleX: 0.3, scaleY: 0.3}
         ],
       },
       
