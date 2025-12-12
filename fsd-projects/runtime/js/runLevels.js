@@ -61,7 +61,7 @@ var runLevels = function (window) {
 
     //handles the death of the enemy
     enemy.onProjectileCollision = function(){
-    game.increaseScore(300);// gives player 100 points if the enemy is killed
+    game.increaseScore(750);// gives player 100 points if the enemy is killed
     enemy.fadeOut();// effect of the enemy death, fading
     };
     }
@@ -108,7 +108,7 @@ var runLevels = function (window) {
           //handles when halle collides with enemy
         levelMarker.onPlayerCollision = function(){
           game.changeIntegrity(100)// player gains 100 health if it touches the marker
-          game.increaseScore(500);// gives player 100 points if the marker is touched
+          game.increaseScore(1900);// gives player 100 points if the marker is touched
           levelMarker.fadeOut();// effect of the marker death, fading
           startLevel();
         };
