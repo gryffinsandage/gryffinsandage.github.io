@@ -31,8 +31,8 @@ var runLevels = function (window) {
       obstacleHitZone.addChild(obstacleImage);//adds picture as a child to hitzone
       obstacleImage.x = offsetX;//offsets image horizontally relative to the hitzone
       obstacleImage.y = offsetY;//offsets image vertically relative to the hitzone
-      obstacleImage.scaleX = scaleX;
-      obstacleImage.scaleY = scaleY;
+      obstacleImage.scaleX = scaleX;//scales the width of the picture of the obstacles
+      obstacleImage.scaleY = scaleY;//scales the height of the picture of the obstacles
 
       obstacleHitZone.rotationalVelocity = rotation;  
 
@@ -47,8 +47,8 @@ var runLevels = function (window) {
     enemy.addChild(enemyImage);//attaches image to enemy object
     enemy.x = x;//set x position of enemy
     enemy.y = y;//set y position of enemy
-    enemyImage.scaleX = scaleX;
-    enemyImage.scaleY = scaleY;
+    enemyImage.scaleX = scaleX;//scales the width of the picture of the enemies
+    enemyImage.scaleY = scaleY;//scales the height of the picture of the enemies
 
     game.addGameItem(enemy);//makes the enemy visible in the game
 
@@ -76,8 +76,8 @@ var runLevels = function (window) {
     reward.addChild(rewardImage);//attaches image to enemy object
     reward.x = x;//set x position of enemy
     reward.y = y;//set y position of enemy
-    rewardImage.scaleX = scaleX
-    rewardImage.scaleY = scaleY
+    rewardImage.scaleX = scaleX//scales the width of the picture of the rewards
+    rewardImage.scaleY = scaleY//scales the width of the picture of the rewards
     game.addGameItem(reward);//makes the enemy visible in the game
 
     reward.velocityX -= 3// sets the speed of the enemy
@@ -99,8 +99,8 @@ var runLevels = function (window) {
         levelMarker.addChild(levelImage);//attaches image to enemy object
         levelMarker.x = x;//set x position of enemy
         levelMarker.y = y;//set y position of enemy
-        levelImage.scaleX = scaleX
-        levelImage.scaleY = scaleY
+        levelImage.scaleX = scaleX//scales the width of the picture of the level marker
+        levelImage.scaleY = scaleY//scales the width of the picture of the level marker
         game.addGameItem(levelMarker);//makes the enemy visible in the game
 
         levelMarker.velocityX -= 3// sets the speed of the enemy
