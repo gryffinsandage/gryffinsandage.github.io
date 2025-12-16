@@ -26,11 +26,11 @@ var makeLevelData = function (window) {
           { type: "enemy", x: 1500, y: groundY - 50, image:"img/electro.png",scaleX:0.25,scaleY:0.25, offsetX:-25 ,offsetY: -25},
           { type: "enemy", x: 2000, y: groundY - 50, image:"img/ice.png",scaleX:0.25,scaleY:0.25, offsetX:-25 ,offsetY: -25},
           { type: "enemy", x: 2500, y: groundY - 50, image:"img/pekka.png",scaleX:2,scaleY:2, offsetX:-220 ,offsetY: -220},
-          { type: "reward", x: 650, y: groundY - 110, image: "img/coin.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30, points: 200},
-          { type: "reward", x: 1250, y: groundY - 110, image: "img/elixer.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30, points: 200},
-          { type: "reward", x: 1600, y: groundY - 110, image: "img/coin.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30, points: 200},
+          { type: "reward", x: 650, y: groundY - 110, image: "img/coin.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30, points:500},
+          { type: "reward", x: 1250, y: groundY - 110, image: "img/elixer.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30, points: 750},
+          { type: "reward", x: 1600, y: groundY - 110, image: "img/coin.png",scaleX:0.3,scaleY:0.3, offsetX: -40, offsetY: -30, points: 500},
           { type: "levelMarker", x: 3050, y: groundY - 110, offsetX: -35, offsetY: -25, image: "img/chest.png", scaleX: 0.3, scaleY: 0.3}
-        ],
+        ], 
       },
       
       
