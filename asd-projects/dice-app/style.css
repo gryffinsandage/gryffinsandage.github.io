@@ -1,0 +1,78 @@
+/* animated background sourced from google AI*/
+body {
+  background-color: #cfadea; 
+  background-image: linear-gradient(270deg, #d264fa, #51d57f, #726bff, #ff3636);
+  background-size: 400% 400%;
+  animation: gradientAnimation 5s ease infinite;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#bigDie {
+  height: 715px;
+  width: 665px;
+  background-color: rgb(52, 52, 52); /* Feel free to customize */
+  position: absolute;
+  left: 650px;
+  top: 50px;
+  border-radius: 5%;
+}
+#die {
+  height: 115px;
+  width: 115px;
+  background-color: rgb(26, 159, 0); /* Feel free to customize */
+  position: absolute;
+  left: 1200px;
+  top: 50px;
+  border-radius: 30%;
+
+}
+#die2 {
+  height: 115px;
+  width: 115px;
+  background-color: rgb(255, 0, 0); /* Feel free to customize */
+  position: absolute;
+  left: 925px;
+  top: 350px;
+  border-radius: 30%;
+}
+#die3 {
+  height: 115px;
+  width: 115px;
+  background-color: rgb(43, 0, 255); /* Feel free to customize */
+  position: absolute;
+  left: 1200px;
+  top: 650px;
+  border-radius: 30%;
+}
+#die4 {
+  height: 115px;
+  width: 115px;
+  background-color: rgb(255, 0, 187); /* Feel free to customize */
+  position: absolute;
+  left: 650px;
+  top: 650px;
+  border-radius: 30%;
+}
+#die5 {
+  height: 115px;
+  width: 115px;
+  background-color: rgb(255, 162, 0); /* Feel free to customize */
+  position: absolute;
+  left: 650px;
+  top: 50px;
+  border-radius: 30%;
+}
