@@ -53,7 +53,8 @@ function init() {
   makeSnakeSquare(10, 9); // Create a second square to the left of the first
   makeSnakeSquare(10, 8); // Create a third square to the left of the second
   snake.head = snake.body[0]; // Mark the first segment as the head
-
+    var audio = new Audio("Mall.ogg"); 
+  audio.play();
   
   // TODO 4, Part 3: initialize the apple
   makeApple();
