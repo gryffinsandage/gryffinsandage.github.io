@@ -10,23 +10,37 @@ function runProgram(){
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
-  
+  const BOARD_WIDTH = $("#board").width();
+  const BOARD_HEIGHT = $("#board").height();
+  const PLAYER_WIDTH = $(".player").width();
+  const PLAYER_HEIGHT = $(".player").height();
+
 const KEY = {
   LEFT: 37,
   RIGHT: 39,
   UP: 38,
   DOWN: 40,
-  ENTER: 13
+  ENTER: 13,
+
+  A: 65,
+  W: 87,
+  S: 83,
+  D:68
 }
 
   // Game Item Objects
-  let walker = {
+  let player1 = {
     x: 0,
     y: 0,
     speedX: 0,
     speedY: 0
   }
-
+  let player2 = {
+    x:  BOARD_WIDTH - PLAYER_WIDTH,
+    y: BOARD_HEIGHT - PLAYER_HEIGHT,
+    speedX: 0,
+    speedY: 0
+  }
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
 
@@ -62,25 +76,43 @@ $(document).on('keyup', handleKeyUp);
   function handleKeyDown(event) {
     console.log(event.which);
     if(event.which === KEY.LEFT){
-      walker.speedX = -10
-      walker.speedY = 0
+      player1.speedX = -10
+      player1.speedY = 0
     }else if(event.which === KEY.RIGHT){
-      walker.speedX = 10
-      walker.speedY = 0
+      player1.speedX = 10
+      player1.speedY = 0
     }else if(event.which === KEY.UP){
-      walker.speedY = -10
-      walker.speedX = 0
+      player1.speedY = -10
+      player1.speedX = 0
     }else if(event.which === KEY.DOWN){
-      walker.speedY = 10
-      walker.speedX = 0
+      player1.speedY = 10
+      player1.speedX = 0
+    }
+    if(event.which === KEY.A){
+      player2.speedX = -10
+      player2.speedY = 0
+    }else if(event.which === KEY.D){
+      player2.speedX = 10
+      player2.speedY = 0
+    }else if(event.which === KEY.W){
+      player2.speedY = -10
+      player2.speedX = 0
+    }else if(event.which === KEY.S){
+      player2.speedY = 10
+      player2.speedX = 0
     }
   }
 
   function handleKeyUp(){
     if(event.which === KEY.LEFT || event.which === KEY.RIGHT){
-      walker.speedX = 0
+      player1.speedX = 0
     }else if(event.which === KEY.UP || event.which === KEY.DOWN){
-      walker.speedY = 0
+      player1.speedY = 0
+    }
+    if(event.which === KEY.A || event.which === KEY.D){
+      player2.speedX = 0
+    }else if(event.which === KEY.W || event.which === KEY.S){
+      player2.speedY = 0
     }
   }
 
@@ -90,25 +122,38 @@ $(document).on('keyup', handleKeyUp);
 
 
 function repositionGameItem(){
-  walker.x += walker.speedX;
-  walker.y += walker.speedY;
+  player1.x += player1.speedX;
+  player1.y += player1.speedY;
+  player2.x += player2.speedX;
+  player2.y += player2.speedY;
 }
 
 function wallCollision(){
-  if(walker.x > $("#board").width()-$("#walker").width()){
-    walker.x -= walker.speedX;
-  }else if(walker.x < 0){
-    walker.x -= walker.speedX;
-  } else if(walker.y > $("#board").height()-$("#walker").height()){
-    walker.y -= walker.speedY;
-  }else if(walker.y < 0){
-    walker.y -= walker.speedY;
+  if(player1.x > BOARD_WIDTH - PLAYER_WIDTH){
+    player1.x -= player1.speedX;
+  }else if(player1.x < 0){
+    player1.x -= player1.speedX;
+  } else if(player1.y >BOARD_HEIGHT-PLAYER_HEIGHT){
+    player1.y -= player1.speedY;
+  }else if(player1.y < 0){
+    player1.y -= player1.speedY;
+  }
+  if(player2.x > BOARD_WIDTH - PLAYER_WIDTH){
+    player2.x -= player2.speedX;
+  }else if(player2.x < 0){
+    player2.x -= player2.speedX;
+  } else if(player2.y >BOARD_HEIGHT-PLAYER_HEIGHT){
+    player2.y -= player2.speedY;
+  }else if(player2.y < 0){
+    player2.y -= player2.speedY;
   }
 }
 
 function redrawGameItem(){
-  $("#walker").css("left", walker.x);
-  $("#walker").css("top", walker.y);
+  $("#player1").css("left", player1.x);
+  $("#player1").css("top", player1.y);
+  $("#player2").css("left", player2.x);
+  $("#player2").css("top", player2.y);
 }
   
   function endGame() {
