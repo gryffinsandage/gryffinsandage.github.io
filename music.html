@@ -1,65 +1,14 @@
-    
-        
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-    <!--(cnvmp3)(website for converting music videos on yt into mp3 files)-->
-    <!--Music code is from the big jeffrey-->
   <head>
     <title>Gryffin's Website</title>
-    <link rel="stylesheet" href="style.css"/>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <style>
-      .music-player {
-        text-align: center;
-        margin: 20px;
-      }
-      #albumArt {
-        width: 250px;
-        height: 250px;
-        object-fit: cover;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        display: block;
-        margin: 10px auto;
-      }
-      #trackTitle {
-        font-weight: bold;
-        margin: -5px; 
-        font-family: sans-serif;
-      }
-
-      button {
-        margin: 10px 5px 5px 5px; 
-        padding: 10px;
-        font-size: 16px;
-        border-radius: 10px; 
-        cursor: pointer;
-        transition: background 0.3s;
-      }
-
-      .genre-container {
-        margin-top: 15px;
-        padding-top: 10px;
-        border-top: 1px solid #eee;
-      }
-
-      .genre-btn {
-        background-color: #f8f9fa;
-        border: 1px solid #ddd;
-        font-weight: bold;
-        min-width: 80px;
-      }
-
-      .genre-btn:hover {
-        background-color: #e2e6ea;
-      }
-
-      /* Optional: highlight the active genre button */
-      .active-genre {
-        background-color: #007bff !important;
+      body {
         color: white;
-        border-color: #0056b3;
       }
     </style>
   </head>
@@ -67,25 +16,38 @@
   <body>
     <div id="all-contents">
       <nav>
-        <h1>Gryffin's Website</h1>
+        <h1>Gryffin's Amazing Website</h1>
         <ul id="nav-ul">
-          <li class="nav-li"><a href="index.html">Home</a></li>
-          <li class="nav-li"><a href="portfolio.html">Portfolio</a></li>
-          <li class="nav-li"><a href="music.html">Music</a></li>
+          <li class="nav-li"><a href="index.html"> Home </a></li>
+          <li class="nav-li"><a href="portfolio.html"> Portfolio </a></li>
+          <li class="nav-li"><a href="music.html"> Music </a></li>
         </ul>
       </nav>
 
       <div class="music-player">
-        <h2> My Music Player </h2>
-        <audio id="audioPlayer" src=""></audio>
-        
-        <img id="albumArt" src="" alt="Album Cover">
+        <h2 id="title"> Music Player </h2>
+        <audio id="audioPlayer"></audio>
+
+        <img id="albumArt" />
         <p id="trackTitle"></p>
-        
-        <div class="main-controls">
-          <button id="prevBtn"> ◁ </button>
-          <button id="playPauseBtn"> ▶︎ </button>
-          <button id="nextBtn"> ▷ </button>
+
+        <!-- Controls with progress and volume -->
+        <div class="controls-container">
+          <div class="progress-container">
+            <div id="timeDisplay">0:00 / 0:00</div>
+            <input type="range" id="progressBar" min="0" max="100" step="0.1" value="0" />
+          </div>
+
+          <div class="main-controls">
+            <button id="prevBtn">◁</button>
+            <button id="playPauseBtn">▶︎</button>
+            <button id="nextBtn">▷</button>
+          </div>
+
+          <div class="volume-container">
+            <label id = "volumeText"> Volume </label>
+            <input type="range" id="volumeSlider" min="0" max="100" step="1" value="50" />
+          </div>
         </div>
 
         <div class="genre-container">
@@ -93,59 +55,81 @@
           <button class="genre-btn" id="rapBtn" onclick="changePlaylist('rap')">Rap</button>
           <button class="genre-btn" id="popBtn" onclick="changePlaylist('pop')">Pop</button>
         </div>
+
+        <div class="song-list-container" id="songList"></div>
       </div>
     </div>
 
     <script>
-      const audio = document.getElementById('audioPlayer');
-      const prevBtn = document.getElementById('prevBtn');
-      const playPauseBtn = document.getElementById('playPauseBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      const albumArt = document.getElementById('albumArt');
-      const trackTitle = document.getElementById('trackTitle');
+      const audio = document.getElementById("audioPlayer");
+      const prevBtn = document.getElementById("prevBtn");
+      const playPauseBtn = document.getElementById("playPauseBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const albumArt = document.getElementById("albumArt");
+      const trackTitle = document.getElementById("trackTitle");
+      const volumeSlider = document.getElementById("volumeSlider");
+      const songList = document.getElementById("songList");
+      const progressBar = document.getElementById("progressBar");
+      const timeDisplay = document.getElementById("timeDisplay");
 
-      // Playlists organized by category
       const playlists = {
         edm: [
         ],
         rap: [
-          {title: "Myron-Lil Uzi Vert", src: "mp3/Lil Uzi Vert - Myron [Official Audio] 4.mp3", img: "album/myron.jfif"}
+          { title: "Myron - Lil Uzi", src: "mp3/myron.mp3", img: "album/myron.jfif"},
         ],
         pop: [
-          {title: "Hell & Back - Kid Ink", src: "mp3/Kid Ink - Hell & Back [Official Video] 4.mp3", img: "album/hellandback.jpg"}
-        ]
+          {title : "Party in the U.S.A", src: "mp3/party in the usa", img: "album/myron.jfif" }
+        ],
       };
 
-      const genreOrder = ['edm', 'rap', 'pop'];
+      const genreOrder = ["edm", "rap", "pop"];
       let currentGenreIndex = 0;
       let currentTrackIndex = 0;
+
+      function renderSongList() {
+        const genre = genreOrder[currentGenreIndex];
+        songList.innerHTML = "";
+        playlists[genre].forEach((track, index) => {
+          const div = document.createElement("div");
+          div.classList.add("song-item");
+          div.textContent = track.title;
+          if (index === currentTrackIndex) div.classList.add("active-song");
+          div.addEventListener("click", () => {
+            currentTrackIndex = index;
+            loadTrack(currentGenreIndex, currentTrackIndex);
+          });
+          songList.appendChild(div);
+        });
+      }
 
       function loadTrack(gIdx, tIdx, shouldPlay = true) {
         const genre = genreOrder[gIdx];
         const track = playlists[genre][tIdx];
-        
         audio.src = track.src;
         albumArt.src = track.img;
-        albumArt.alt = track.title;
         trackTitle.textContent = track.title;
 
-        // Update active button styling
-        document.querySelectorAll('.genre-btn').forEach(btn => btn.classList.remove('active-genre'));
-        document.getElementById(genre + 'Btn').classList.add('active-genre');
-        
+        document.querySelectorAll(".genre-btn").forEach((btn) =>
+          btn.classList.remove("active-genre")
+        );
+        document.getElementById(genre + "Btn").classList.add("active-genre");
+
+        renderSongList();
+
         if (shouldPlay) {
-          audio.play().catch(e => console.log("Playback interaction required"));
+          audio.play();
           playPauseBtn.textContent = "❚❚";
         }
       }
 
-      function changePlaylist(genreName) {
-        currentGenreIndex = genreOrder.indexOf(genreName);
+      function changePlaylist(name) {
+        currentGenreIndex = genreOrder.indexOf(name);
         currentTrackIndex = 0;
         loadTrack(currentGenreIndex, currentTrackIndex);
       }
 
-      playPauseBtn.addEventListener('click', () => {
+      playPauseBtn.addEventListener("click", () => {
         if (audio.paused) {
           audio.play();
           playPauseBtn.textContent = "❚❚";
@@ -155,37 +139,60 @@
         }
       });
 
-      nextBtn.addEventListener('click', () => {
+      nextBtn.addEventListener("click", () => {
         currentTrackIndex++;
-        
-        // If we reach the end of the current playlist, move to the next genre
         if (currentTrackIndex >= playlists[genreOrder[currentGenreIndex]].length) {
           currentTrackIndex = 0;
-          currentGenreIndex = (currentGenreIndex + 1) % genreOrder.length; 
+          currentGenreIndex = (currentGenreIndex + 1) % genreOrder.length;
         }
-        
         loadTrack(currentGenreIndex, currentTrackIndex);
       });
 
-      prevBtn.addEventListener('click', () => {
+      prevBtn.addEventListener("click", () => {
         currentTrackIndex--;
-        
-        // If we go before the start, go to the end of the previous genre
         if (currentTrackIndex < 0) {
           currentGenreIndex = (currentGenreIndex - 1 + genreOrder.length) % genreOrder.length;
           currentTrackIndex = playlists[genreOrder[currentGenreIndex]].length - 1;
         }
-        
         loadTrack(currentGenreIndex, currentTrackIndex);
       });
 
-      // Automatically play next song (and move to next playlist if needed)
-      audio.addEventListener('ended', () => {
+      // Volume slider input: nonlinear scaling for smoother control
+      volumeSlider.addEventListener("input", () => {
+        // Map slider 0-100 to a logarithmic volume curve
+        const linearValue = volumeSlider.value / 100; // 0-1
+        // logarithmic approximation (perceived volume)
+        audio.volume = Math.pow(linearValue, 2); // squaring makes low values quieter, high values less harsh
+        updateSliderBackground(volumeSlider);
+      });
+
+      // Progress bar update
+      audio.addEventListener("timeupdate", () => {
+        const percent = (audio.currentTime / audio.duration) * 100 || 0;
+        progressBar.value = percent;
+        updateSliderBackground(progressBar);
+
+        const formatTime = (t) => `${Math.floor(t / 60)}:${Math.floor(t % 60).toString().padStart(2, "0")}`;
+        timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration || 0)}`;
+      });
+
+      progressBar.addEventListener("input", () => {
+        audio.currentTime = (progressBar.value / 100) * audio.duration;
+        updateSliderBackground(progressBar);
+      });
+
+      function updateSliderBackground(slider) {
+        const val = slider.value;
+        slider.style.background = `linear-gradient(to right, #007bff 0%, #007bff ${val}%, #555 ${val}%, #555 100%)`;
+      }
+
+      audio.addEventListener("ended", () => {
         nextBtn.click();
       });
 
-      // Initial setup: load first song of EDM but don't autoplay until user clicks
       loadTrack(currentGenreIndex, currentTrackIndex, false);
+      updateSliderBackground(volumeSlider);
+      updateSliderBackground(progressBar);
     </script>
   </body>
 </html>
