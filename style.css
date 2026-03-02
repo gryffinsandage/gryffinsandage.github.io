@@ -11,11 +11,16 @@ button {
    border-radius: 10px;
    cursor: pointer;
    transition: background 0.3s;
+   font-family: sans-serif;
 }
 
 #all-contents {
     max-width: 800px;
     margin: auto;
+    font-family: sans-serif;
+}
+html {
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 /* navigation menu */
@@ -24,6 +29,7 @@ nav {
     margin: 0 auto;
     display: flex;
     padding: 10px;
+    font-family: sans-serif;
 }
 
 h1 {
@@ -32,6 +38,7 @@ h1 {
     color: rgb(0, 0, 0);
     flex: 1;
     margin: 0;
+    font-family: sans-serif;
 }
 
 #nav-ul {
@@ -39,16 +46,19 @@ h1 {
     margin: 0;
     padding: 0;
     display: flex;
+    font-family: sans-serif;
 }
 
 .nav-li {
     display: inline-block;
     padding: 0 10px;
+    font-family: sans-serif;
 }
 
 a {
     text-decoration: none;
     color: #000000;
+    font-family: sans-serif;
 }
 
 /* main container area beneath menu */
@@ -56,20 +66,24 @@ main {
     background: rgb(245, 238, 219);
     display: flex;
     margin-top: 20px;
+    font-family: sans-serif;
 }
 
 .sidebar {
     margin-right: 25px;
     padding: 10px;
+    font-family: sans-serif;
 }
 
 .sidebar-img {
     width: 200px;
+    font-family: sans-serif;
 }
 
 .content {
     flex: 1;
     padding: 15px;
+    font-family: sans-serif;
 }
 
 /* interests section styles */
@@ -77,21 +91,25 @@ main {
     border: 4px silver ridge;
     padding: 8px;
     margin-top: 20px;
+    font-family: sans-serif;
 }
 
 h2, h3 {
     margin: 0px;
+    font-family: sans-serif;
 }
 
 
 /* Portfolio styles */
 .content h1 {
   color: black;
+  font-family: sans-serif;
 }
 
 #portfolio {
   list-style-type: none;
   padding-left: 0;
+  font-family: sans-serif;
 }
 
 #portfolio li {
@@ -99,6 +117,7 @@ h2, h3 {
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
+  font-family: sans-serif;
 }
 
 #portfolio li:hover {
@@ -247,6 +266,7 @@ margin-left: auto;
 margin-right: auto;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 text-align: left;
+font-family: sans-serif;
     }
 
 .song-item {
@@ -257,6 +277,7 @@ transition: background 0.2s;
 font-family: sans-serif;
 font-size: 14px;
 color: black;
+font-family: sans-serif;
 }
 
 .song-item:hover {
@@ -277,4 +298,5 @@ color: white;
 font-size: 20px;  /* bigger font */
 color: white;
 margin-bottom: 6px;
+font-family: sans-serif;
 }

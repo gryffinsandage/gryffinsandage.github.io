@@ -65,6 +65,7 @@ $(document).on('keyup', handleKeyUp);
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
+ //calls every function so that the code applies to both players
   function newFrame() {
     repositionGameItem(player1);
     repositionGameItem(player2);
@@ -91,6 +92,8 @@ $(document).on('keyup', handleKeyUp);
   
   Note: You can have multiple event handlers for different types of events.
   */
+
+  //causes the player to move depending on which button is pressed down
   function handleKeyDown(event) {
     console.log(event.which);
     if(event.which === KEY.LEFT){
@@ -125,7 +128,7 @@ $(document).on('keyup', handleKeyUp);
       console.log("Party!")
     }
   }
-
+  //stops the player from moving when the key is no longer pressed
   function handleKeyUp(){
     if(event.which === KEY.LEFT || event.which === KEY.RIGHT){
       player1.speedX = 0
@@ -143,12 +146,12 @@ $(document).on('keyup', handleKeyUp);
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-
+//applies speed to the character for X and Y values.
 function repositionGameItem(player){
   player.x += player.speedX;
   player.y += player.speedY;
 }
-
+//stops the player from going pass the wall of the game area
 function wallCollision(player){
   if(player.x > BOARD_WIDTH - PLAYER_WIDTH){
     player.x -= player.speedX;
@@ -160,12 +163,13 @@ function wallCollision(player){
     player.y -= player.speedY;
   }
 }
-
+//sets the spawn location of each player
 function redrawGameItem(player){
   $(player.id).css("left", player.x);
   $(player.id).css("top", player.y);
 
 }
+// determines if the two players are in  contact
   function doCollide(a, b){
     return (
       a.x < b.x + PLAYER_WIDTH &&
@@ -175,7 +179,7 @@ function redrawGameItem(player){
     )
   }
 
-
+//changes the background color to flashing colors if the two players are in contact
   function colorChange(player){
     var randomColor = "#000000".replace(/0/g, function () {
       return (~~(Math.random() * 16)).toString(16);
@@ -183,11 +187,10 @@ function redrawGameItem(player){
 
     $(player.id).css("backgroundColor", randomColor);
   }
-  
+  //stops interval timer when the game ends
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
-
 
 
     // turn off event handlers
