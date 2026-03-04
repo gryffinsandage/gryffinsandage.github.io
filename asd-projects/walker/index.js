@@ -69,10 +69,10 @@ $(document).on('keyup', handleKeyUp);
   function newFrame() {
     repositionGameItem(player1);
     repositionGameItem(player2);
-    redrawGameItem(player1)
-    redrawGameItem(player2)
-    wallCollision(player1)
-    wallCollision(player2)
+    wallCollision(player1);
+    wallCollision(player2);
+    redrawGameItem(player1);
+    redrawGameItem(player2);
     if(doCollide(player1,player2)){
       console.log("Tag!")
       var randomColor = "#000000".replace(/0/g, function () {
@@ -129,7 +129,7 @@ $(document).on('keyup', handleKeyUp);
     }
   }
   //stops the player from moving when the key is no longer pressed
-  function handleKeyUp(){
+  function handleKeyUp(event){
     if(event.which === KEY.LEFT || event.which === KEY.RIGHT){
       player1.speedX = 0
     }else if(event.which === KEY.UP || event.which === KEY.DOWN){
