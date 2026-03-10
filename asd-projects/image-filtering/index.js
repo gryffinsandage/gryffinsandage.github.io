@@ -84,7 +84,7 @@ function decreaseBlue(pixelArray){
   pixelArray[BLUE] = keepInBounds(pixelArray[BLUE] - 50);
 }
 function increaseGreenByBlue(pixelArray){
-  pixelArray[GREEN]  = keepInBounds(pixelArray[GREEN] += pixelArray[BLUE]);
+  pixelArray[GREEN]  = keepInBounds(pixelArray[GREEN] + pixelArray[BLUE]);
 
 }
 // CHALLENGE code goes below here
