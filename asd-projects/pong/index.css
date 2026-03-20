@@ -2,6 +2,10 @@
 body {
   background-color: darkgreen;
 }
+#player-one {
+  
+}
+
 
 #board {
   width: 1200px;
@@ -10,7 +14,7 @@ body {
   background-color: black;
   position: absolute;
   left: 380px;   
-  top: 75px;  
+  top: 175px;  
 }
 
 #leftPaddle {
@@ -39,4 +43,12 @@ body {
   left: 580px;   
   top: 200px;  
   border-radius: 100px;
+}
+#pong-text {
+  color: white;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-family:'Courier New', Courier, monospace; 
+  font-size: 100px; 
+  left: 50%; 
 }
