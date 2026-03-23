@@ -61,6 +61,8 @@ function runProgram(){
     paddleCollide(leftPaddle);
     paddleCollide(rightPaddle);
     handleCollision();
+    handleEndGame(leftPaddleScore);
+    handleEndGame(rightPaddleScore);
   }
   
   /* 
@@ -134,11 +136,16 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+  function handleEndGame(score){
+    if(score === 10){
+      gameEnd();
+    }
+  }
   function redrawPoints(player){
     if(player.id = "#leftPaddle"){
-      $("#leftPaddle").text(leftPaddleScore)
+      $("#player-one").text(leftPaddleScore)
     }else if(player.id = "#rightPaddle"){
-      $("#rightPaddle").text(rightPaddleScore)
+      $("#player-two").text(rightPaddleScore)
     }
   }
   function handleCollision(){
