@@ -34,7 +34,9 @@ function runProgram(){
   var ball = GameItems(BOARD_WIDTH / 2, BOARD_HEIGHT / 2, (Math.random() > 0.5 ? -10 : 10), (Math.random() > 0.5 ? -1 : 1), "#ball")
   var leftPaddle = GameItems(20, BOARD_HEIGHT / 2 - 125, 0, 0, "#leftPaddle"  );
   var rightPaddle = GameItems(BOARD_WIDTH - 30, BOARD_HEIGHT / 2 - 125, 0, 0, "#rightPaddle"  );
-
+  //other variables
+  var leftPaddleScore = 0;
+  var rightPaddleScore = 0;
 
   // one-time setup
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -56,10 +58,9 @@ function runProgram(){
     moveObj(leftPaddle);
     moveObj(rightPaddle);
     collision(ball);
-    doCollideLeft();
-    doCollideRight();
     paddleCollide(leftPaddle);
     paddleCollide(rightPaddle);
+    handleCollision();
   }
   
   /* 
@@ -96,9 +97,13 @@ function runProgram(){
   }
   function collision(obj){
     if(obj.x >= BOARD_WIDTH){
-      endGame();
+      leftPaddleScore += 1;
+      redrawPoints(leftPaddle);
+      reset();
     }else if(obj.x <= 0){
-      endGame();
+      rightPaddleScore += 1;
+      redrawPoints(rightPaddle);
+      reset()
     }else if(obj.y >= BOARD_HEIGHT - ball.height){
       obj.speedY = -obj.speedY;
     }else if(obj.y <= 0 + ball.height){
@@ -112,20 +117,40 @@ function runProgram(){
       paddle.speedY = 0
     }
   }
-  function doCollideLeft(){
-   if( ball.x <= leftPaddle.x - ball.width + leftPaddle.width && ball.y > leftPaddle.y && ball.y < leftPaddle.y + leftPaddle.height ){
-      ball.speedX = -ball.speedX
-   }
+  function doCollide(a,b){
+   return (
+      a.x < b.x + b.width &&
+      a.x + b.width > b.x &&
+      a.y < b.y + b.height &&
+      a.y + b.height > b.y
+    )
 }
-function doCollideRight(){
-  if(ball.x >= rightPaddle.x && ball.y > rightPaddle.y && ball.y < rightPaddle.y + rightPaddle.height){
-    ball.speedX = -ball.speedX
+  function reset(){
+    ball = GameItems(BOARD_WIDTH / 2, BOARD_HEIGHT / 2, (Math.random() > 0.5 ? -10 : 10), (Math.random() > 0.5 ? -1 : 1), "#ball")
+    leftPaddle = GameItems(20, BOARD_HEIGHT / 2 - 125, 0, 0, "#leftPaddle"  );
+    rightPaddle = GameItems(BOARD_WIDTH - 30, BOARD_HEIGHT / 2 - 125, 0, 0, "#rightPaddle"  );
   }
-}
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+  function redrawPoints(player){
+    if(player.id = "#leftPaddle"){
+      $("#leftPaddle").text(leftPaddleScore)
+    }else if(player.id = "#rightPaddle"){
+      $("#rightPaddle").text(rightPaddleScore)
+    }
+  }
+  function handleCollision(){
+    if(doCollide(ball, leftPaddle)){
+      ball.speedX = -ball.speedX;
+      ball.speedY = Math.random() * 15;
+    }else if(doCollide(ball, rightPaddle)){
+      ball.speedX = -ball.speedX;
+      ball.speedY = Math.random() * 15;
+    }
+  }
+
 
   function drawObject(gameItem){
     $(gameItem.id).css("top", gameItem.y);
