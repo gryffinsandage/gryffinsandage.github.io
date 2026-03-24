@@ -35,8 +35,8 @@ function runProgram(){
   var leftPaddle = GameItems(20, BOARD_HEIGHT / 2 - 125, 0, 0, "#leftPaddle"  );
   var rightPaddle = GameItems(BOARD_WIDTH - 30, BOARD_HEIGHT / 2 - 125, 0, 0, "#rightPaddle"  );
   //other variables
-  var leftPaddleScore = 9;
-  var rightPaddleScore = 9;
+  var leftPaddleScore = 0;
+  var rightPaddleScore = 0;
 
   // one-time setup
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -61,8 +61,7 @@ function runProgram(){
     paddleCollide(leftPaddle);
     paddleCollide(rightPaddle);
     handleCollision();
-    handleEndGame(leftPaddleScore);
-    handleEndGame(rightPaddleScore);
+    handleEndGame();
   }
   
   /* 
@@ -137,22 +136,22 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
-  function handleEndGame(score){
-    if(score === 10){
-      if(score === leftPaddleScore){
+  function handleEndGame(){
+      if(leftPaddleScore === 10){
         $("#game-end").text("Player 1 Wins!")
-      }else if(score === rightPaddleScore){
+        endGame();
+      }else if(rightPaddleScore === 10){
         $("#game-end").text("Player 2 Wins!")
+        endGame();
       }
-      endGame();
-    }
+
 
   }
   function redrawPoints(player){
-    if(player.id = "#leftPaddle"){
+    if(player.id === "#leftPaddle"){
       $("#player-one").text("Player 1 score: " + leftPaddleScore)
     }
-    if(player.id = "#rightPaddle"){
+    if(player.id === "#rightPaddle"){
       $("#player-two").text("Player 2 score: " + rightPaddleScore)
     }
   }
