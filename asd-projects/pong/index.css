@@ -12,6 +12,13 @@ body {
   left: 0px;
   top:  50px;
 }
+#game-end {
+  position: absolute;
+  left: 50%;
+  top:  50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
 
 #board {
   width: 1200px;
