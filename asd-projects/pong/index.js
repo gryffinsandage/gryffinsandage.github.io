@@ -57,10 +57,10 @@ function runProgram(){
     moveObj(ball);
     moveObj(leftPaddle);
     moveObj(rightPaddle);
+    handleCollision();
     collision(ball);
     paddleCollide(leftPaddle);
-    paddleCollide(rightPaddle);
-    handleCollision();
+    paddleCollide(rightPaddle);    
     handleEndGame();
   }
   
