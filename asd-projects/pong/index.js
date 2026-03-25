@@ -8,11 +8,11 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
 
   // Constant Variables
-  const FRAME_RATE = 60;
+  const FRAME_RATE = 60;//sets FPS to 60
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
-  const BOARD_WIDTH = $("#board").width();
-  const BOARD_HEIGHT = $("#board").height() ;
-  const KEYCODE = {
+  const BOARD_WIDTH = $("#board").width();//sets the board width to the width stated in the css
+  const BOARD_HEIGHT = $("#board").height();//sets the board height to the height stated in the css
+  const KEYCODE = {//sets the keycode of each key to later be used in functions
       UP: 38,
       DOWN: 40,
       W: 87,
@@ -20,29 +20,29 @@ function runProgram(){
       ENTER: 13,
     }
   // Game Item Objects
-  function GameItems(x, y, speedX, speedY, id){
+  function GameItems(x, y, speedX, speedY, id){//gives paramaters of each value of every object to be customized based on each object
     return {
-      x: x,
-      y: y,
-      speedX: speedX,
-      speedY: speedY,
-      width: $(id).width(),
-      height:$(id).height(),
-      id: id,
+      x: x,//sets each objects x coordinate based on the value given
+      y: y,//sets each objects y coordinate based on the value given
+      speedX: speedX,//sets each objects left and right speed based on the value given
+      speedY: speedY,//sets each objects up and down speed based on the value given
+      width: $(id).width(),//sets each objects width based on the value given in the css
+      height:$(id).height(),//sets each objects height based on the value given in the css
+      id: id,//sets each objects id based on the id given in the css
     }
   }
-  var ball = GameItems(BOARD_WIDTH / 2, BOARD_HEIGHT / 2, (Math.random() > 0.5 ? -10 : 10), (Math.random() > 0.5 ? -1 : 1), "#ball")
-  var leftPaddle = GameItems(20, BOARD_HEIGHT / 2 - 125, 0, 0, "#leftPaddle"  );
-  var rightPaddle = GameItems(BOARD_WIDTH - 30, BOARD_HEIGHT / 2 - 125, 0, 0, "#rightPaddle"  );
+  var ball = GameItems(BOARD_WIDTH / 2, BOARD_HEIGHT / 2, (Math.random() > 0.5 ? -10 : 10), (Math.random() > 0.5 ? -1 : 1), "#ball")//sets the ball to spawn in the center of the board
+  var leftPaddle = GameItems(20, BOARD_HEIGHT / 2 - 125, 0, 0, "#leftPaddle"  );//sets the left paddle to spawn in the center of the left side of the board
+  var rightPaddle = GameItems(BOARD_WIDTH - 30, BOARD_HEIGHT / 2 - 125, 0, 0, "#rightPaddle"  );//sets the right paddle to spawn in the center of the right side of the board
   //other variables
-  var leftPaddleScore = 0;
-  var rightPaddleScore = 0;
+  var leftPaddleScore = 0;//starts the left paddle's score to start at 0
+  var rightPaddleScore = 0;//starts the right paddle's score to start at 0
 
   // one-time setup
-  let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
-  $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
-  $(document).on('keyup', handleKeyUp);
-  $("#restart-button").on("click", resetGame);
+  let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);// execute newFrame every 0.0166 seconds (60 Frames per second)
+  $(document).on('keydown', handleKeyDown);//allows certain key presses to be used in functions
+  $(document).on('keyup', handleKeyUp);//allows certain key releases to be used in functions
+  $("#restart-button").on("click", resetGame);//assigns the button to a function that reloads the page
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -138,13 +138,7 @@ function runProgram(){
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   function resetGame(){
-    ball = GameItems(BOARD_WIDTH / 2, BOARD_HEIGHT / 2, (Math.random() > 0.5 ? -10 : 10), (Math.random() > 0.5 ? -1 : 1), "#ball")
-    leftPaddle = GameItems(20, BOARD_HEIGHT / 2 - 125, 0, 0, "#leftPaddle"  );
-    rightPaddle = GameItems(BOARD_WIDTH - 30, BOARD_HEIGHT / 2 - 125, 0, 0, "#rightPaddle"  );
-    leftPaddleScore = 0;
-    rightPaddleScore = 0;
-    redrawPoints(leftPaddle);
-    redrawPoints(rightPaddle);
+    window.location.reload();
   }
 
 
