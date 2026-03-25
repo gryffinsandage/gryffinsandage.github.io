@@ -42,6 +42,7 @@ function runProgram(){
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
   $(document).on('keyup', handleKeyUp);
+  $("#restart-button").on("click", resetGame);
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -121,10 +122,10 @@ function runProgram(){
   }
   function doCollide(a,b){
    return (
-      a.x < b.x + b.width &&
-      a.x + b.width > b.x &&
-      a.y < b.y + b.height &&
-      a.y + b.height > b.y
+      a.x < b.x + b.width &&      // left side of a is left of b's right edge
+      a.x + a.width > b.x &&      // right side of a is right of b's left edge
+      a.y < b.y + b.height &&     // top of a is above b's bottom edge
+      a.y + a.height > b.y        // bottom of a is below b's top edge
     )
 }
   function reset(){
@@ -136,13 +137,24 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+  function resetGame(){
+    ball = GameItems(BOARD_WIDTH / 2, BOARD_HEIGHT / 2, (Math.random() > 0.5 ? -10 : 10), (Math.random() > 0.5 ? -1 : 1), "#ball")
+    leftPaddle = GameItems(20, BOARD_HEIGHT / 2 - 125, 0, 0, "#leftPaddle"  );
+    rightPaddle = GameItems(BOARD_WIDTH - 30, BOARD_HEIGHT / 2 - 125, 0, 0, "#rightPaddle"  );
+    leftPaddleScore = 0;
+    rightPaddleScore = 0;
+    redrawPoints(leftPaddle);
+    redrawPoints(rightPaddle);
+  }
+
+
   function handleEndGame(){
       if(leftPaddleScore === 10){
         $("#game-end").text("Player 1 Wins!")
         endGame();
       }else if(rightPaddleScore === 10){
         $("#game-end").text("Player 2 Wins!")
-        endGame();
+        endGame();//kljghjkghjkghjkghkgjkg
       }
 
 

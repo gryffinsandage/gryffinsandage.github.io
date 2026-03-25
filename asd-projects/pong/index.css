@@ -60,6 +60,13 @@ body {
   top: 175px;  
   border-radius: 100px;
 }
+#restart-button {
+  background-color: rgb(61, 186, 61);
+  z-index: 10;
+  font-family:'Courier New', Courier, monospace;
+  position: absolute;
+  
+}
 #ball {
   background-color: rgb(255, 255, 255);
   width: 20px;
