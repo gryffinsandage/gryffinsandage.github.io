@@ -68,56 +68,58 @@ function runProgram(){
   /* 
   Called in response to events.
   */
+  //creates control for each key that is pressed down
   function handleKeyDown(event){
     var keycode = event.which;
     console.log(keycode);
 
     if (keycode === KEYCODE.UP) {
-      rightPaddle.speedY = -10;
+      rightPaddle.speedY = -10;//the up key makes the right padde go up
     }else if (keycode === KEYCODE.DOWN) {
-      rightPaddle.speedY =  10;
+      rightPaddle.speedY =  10;//the down key makes the right padde go down
     }
     if (keycode === KEYCODE.W) {
-      leftPaddle.speedY =  -10;
+      leftPaddle.speedY =  -10;//the w key makes the left padde go up
     }else if (keycode === KEYCODE.S) {
-      leftPaddle.speedY =  10;
+      leftPaddle.speedY =  10;//the s key makes the left padde go down
     }  
-  }
+  }//when the key is no longer pressed, the paddles stop moving
   function handleKeyUp(event){
     var keycode = event.which
     if (keycode === KEYCODE.UP) {
-      rightPaddle.speedY = 0;
+      rightPaddle.speedY = 0;//release of the up key stops the right paddle's movement
     }else if (keycode === KEYCODE.DOWN) {
-      rightPaddle.speedY = 0;
+      rightPaddle.speedY = 0;//release of the down key stops the right paddle's movement
     }
     if (keycode === KEYCODE.W) {
-      leftPaddle.speedY =  0;
+      leftPaddle.speedY =  0;//release of the w key stops the left paddle's movement
     }else if (keycode === KEYCODE.S) {
-      leftPaddle.speedY =  0;
+      leftPaddle.speedY =  0;//release of the s key stops the left paddle's movement
     }
 
-  }
+  }//causes events to happen after every time the ball hits a wall
   function collision(obj){
     if(obj.x >= BOARD_WIDTH){
-      leftPaddleScore += 1;
+      leftPaddleScore += 1;//every time the ball hits the right wall, the left paddle's score increases by 1
       redrawPoints(leftPaddle);
-      reset();
+      reset();//resets the ball's and paddles' positions after the ball hits the right wall
     }else if(obj.x <= 0){
-      rightPaddleScore += 1;
+      rightPaddleScore += 1;//every time the ball hits theleft wall, the right paddle's score increases by 1
       redrawPoints(rightPaddle);
-      reset()
+      reset()//resets the ball's and paddles' positions after the ball hits the left wall
     }else if(obj.y >= BOARD_HEIGHT - ball.height){
-      obj.speedY = -obj.speedY;
+      obj.speedY = -obj.speedY;//every time the ball hits the top of the wall, its y speed is reversed so it bounces away
     }else if(obj.y <= 0 + ball.height){
-      obj.speedY = -obj.speedY;
+      obj.speedY = -obj.speedY;//every time the ball hits the bottom of the wall, its y speed is reversed so it bounces away
     }
   }
+  //stops the paddles from leaving the board
   function paddleCollide(paddle){
     if(paddle.y < 0){
-      paddle.y = 0
+      paddle.y = 0//sets the paddles' y position to 0 to stop it from going any higher, out of the board
     }
     if(paddle.y > BOARD_HEIGHT - paddle.height){
-      paddle.y = BOARD_HEIGHT - paddle.height
+      paddle.y = BOARD_HEIGHT - paddle.height//sets the paddles' y position to be right above the bottom of the board to stop it from going any lower, out of the board
     }
   }
   function doCollide(a,b){
@@ -127,7 +129,7 @@ function runProgram(){
       a.y < b.y + b.height &&     // top of a is above b's bottom edge
       a.y + a.height > b.y        // bottom of a is below b's top edge
     )
-}
+}//after every reset, these parameters set the start position of each paddle and the ball
   function reset(){
     ball = GameItems(BOARD_WIDTH / 2, BOARD_HEIGHT / 2, (Math.random() > 0.5 ? -10 : 10), (Math.random() > 0.5 ? -1 : 1), "#ball")
     leftPaddle = GameItems(20, BOARD_HEIGHT / 2 - 125, 0, 0, "#leftPaddle"  );
@@ -138,17 +140,17 @@ function runProgram(){
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   function resetGame(){
-    window.location.reload();
+    window.location.reload();//each reset reloads the page
   }
 
-
+//ends the game after either paddle has 10 points
   function handleEndGame(){
       if(leftPaddleScore === 10){
-        $("#game-end").text("Player 1 Wins!")
-        endGame();
+        $("#game-end").text("Player 1 Wins!")//if the left player/paddle gets 10 points, a message is showed to show the winner
+        endGame();//the game is reset after a player gets 10 points
       }else if(rightPaddleScore === 10){
-        $("#game-end").text("Player 2 Wins!")
-        endGame();//kljghjkghjkghjkghkgjkg
+        $("#game-end").text("Player 2 Wins!")//if the right player/paddle gets 10 points, a message is showed to show the winner
+        endGame();//the game is reset after a player gets 10 points
       }
 
 
@@ -163,23 +165,22 @@ function runProgram(){
   }
   function handleCollision(){
     if(doCollide(ball, leftPaddle)){
-      ball.speedX = -ball.speedX;
-      ball.speedY = Math.random() * 15;
+      ball.speedX = -ball.speedX;//makes the ball bounce right if it hits the left paddle by reversing the ball's x speed
+      ball.speedY = Math.random() * 15;//gives the ball a random Y speed
     }else if(doCollide(ball, rightPaddle)){
-      ball.speedX = -ball.speedX;
-      ball.speedY = Math.random() * 15;
+      ball.speedX = -ball.speedX;//makes the ball bounce left if it hits the rightt paddle by reversing the ball's x speed
+      ball.speedY = Math.random() * 15;//gives the ball a random  Y speed
     }
   }
 
-
   function drawObject(gameItem){
-    $(gameItem.id).css("top", gameItem.y);
-    $(gameItem.id).css("left", gameItem.x);
+    $(gameItem.id).css("top", gameItem.y);//spawns each object based off of their y/top position
+    $(gameItem.id).css("left", gameItem.x);//spawns each object based off of their x/left position
 
   }
   function moveObj(gameItem){
-    gameItem.x += gameItem.speedX;
-    gameItem.y += gameItem.speedY;
+    gameItem.x += gameItem.speedX;//moves each object based off of the set x (left/right) speed
+    gameItem.y += gameItem.speedY;//moves each object based off of the set y (up/down) speed
   }
   
   function endGame() {
