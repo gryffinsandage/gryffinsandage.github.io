@@ -157,10 +157,10 @@ function runProgram(){
   }
   function redrawPoints(player){
     if(player.id === "#leftPaddle"){
-      $("#player-one").text("Player 1 score: " + leftPaddleScore)
+      $("#player-one").text("Player 1 score: " + leftPaddleScore)//adds a point for the left player to the text
     }
     if(player.id === "#rightPaddle"){
-      $("#player-two").text("Player 2 score: " + rightPaddleScore)
+      $("#player-two").text("Player 2 score: " + rightPaddleScore)//adds a point for the right player to the text
     }
   }
   function handleCollision(){
